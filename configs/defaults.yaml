@@ -1,0 +1,26 @@
+# configs/defaults.yaml
+
+# ========== 设备与种子 ==========
+device: cuda          # 可被覆盖为 "cpu"
+seed: 42
+
+# ========== 环境 ==========
+env_name: null        # 必须在实验配置中指定
+
+# ========== 训练流程 ==========
+training:
+  num_epochs: 1000
+  num_steps_per_epoch: 1000
+  batch_size: 256
+  eval_freq: 10       # 每10个epoch评估一次
+  save_freq: 100      # 每100个epoch保存模型
+  num_eval_episodes: 10  # 评估时的轨迹数
+
+# ========== 日志 ==========
+logging:
+  use_wandb: false
+  wandb_project: offline_rl
+  log_dir: logs       # Hydra 会自动重定向到 output_dir
+
+# ========== 算法占位符 ==========
+algo: null            # 必须在实验配置中通过 _target_ 指定
