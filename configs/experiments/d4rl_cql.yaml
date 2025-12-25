@@ -1,0 +1,39 @@
+# @package _global_
+# ^^^ 必须添加这一行！这是修复问题的关键
+
+defaults:
+  - /defaults          # 继承根目录下的 defaults.yaml
+  - _self_             # 允许当前文件覆盖默认值
+
+# ========== 覆盖环境 ==========
+env_name: halfcheetah-medium-v2
+
+# ========== 算法指定 ==========
+algo:
+  _target_: algos.offline.cql.CQL
+
+  # ----- 必须保留 ???，等待 Python 代码注入 -----
+  observation_dim: ???   
+  action_dim: ???        
+
+  # ----- CQL 特有超参数 -----
+  cql_alpha: 5.0
+  tau: 0.005
+  actor_lr: 3e-4
+  critic_lr: 3e-4
+  use_automatic_entropy_tuning: true
+  target_entropy: null
+
+  # ----- 网络结构 -----
+  actor:
+    hidden_dims: [256, 256]
+    activation: "relu"
+    log_std_min: -5.0
+    log_std_max: 2.0
+    use_tanh: true
+    dropout: 0.0
+
+  critic:
+    hidden_dims: [256, 256]
+    activation: "relu"
+    dropout: 0.0
